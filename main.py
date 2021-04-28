@@ -1,10 +1,9 @@
 import sys
 
-from PySide2.QtWidgets import QApplication, QDialog, QLineEdit, QPushButton
+from PySide2.QtWidgets import QApplication, QDialog
 
 
 class Form(QDialog):
-
     def __init__(self, parent=None):
         super(Form, self).__init__(parent)
         self.setWindowTitle("My Form")
