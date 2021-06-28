@@ -1,19 +1,23 @@
 import sys
 
-from PySide2.QtWidgets import QApplication, QDialog
+from PySide2.QtWidgets import QApplication, QMainWindow
+
+from ui.ui_mainwindow import Ui_MainWindow
 
 
-class Form(QDialog):
-    def __init__(self, parent=None):
-        super(Form, self).__init__(parent)
-        self.setWindowTitle("My Form")
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super(MainWindow, self).__init__()
+        self.ui = Ui_MainWindow()
+        self.ui.setupUi(self)
+        self.setWindowTitle("Time&Led")
 
 
 if __name__ == '__main__':
     # Create the Qt Application
     app = QApplication(sys.argv)
     # Create and show the form
-    form = Form()
+    form = MainWindow()
     form.show()
     # Run the main Qt loop
     sys.exit(app.exec_())
