@@ -13,7 +13,8 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("Time&Led")
 
 
-if __name__ == '__main__':
+def main():
+
     # Create the Qt Application
     app = QApplication(sys.argv)
     # Create and show the form
@@ -21,3 +22,7 @@ if __name__ == '__main__':
     form.show()
     # Run the main Qt loop
     sys.exit(app.exec_())
+
+
+if __name__ == '__main__':
+    main()
