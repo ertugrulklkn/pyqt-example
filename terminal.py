@@ -43,7 +43,7 @@ def main():
     while True:
         user_input = input()
         if user_input == "!EXIT":
-            com_thread.join()
+            # com_thread.join()
             sys.exit()
         com_port.sendCommand(user_input + '\n')
 
