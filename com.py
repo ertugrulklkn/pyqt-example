@@ -5,8 +5,15 @@ from serial.serialutil import SerialException
 
 
 class ComException(Exception):
+    def __init__(self, e: SerialException or ValueError, *args: object) -> None:
+        super().__init__(*args)
+        if e:
+            self.message = e.strerror
+        else:
+            self.message = ""
+
     def __str__(self) -> str:
-        return "COM could not connect!"
+        return f"COM could not connect! {self.message}"
 
 
 class Com(object):
@@ -31,8 +38,11 @@ class Com(object):
         """
         try:
             self.serial = Serial(port, baud)
-        except (ValueError, SerialException):
-            raise ComException
+        except (ValueError, SerialException) as e:
+            raise ComException(e)
+
+    def end(self):
+        self.serial.close()
 
     def sendCommand(self, command: str) -> None:
         """Send a single line command to Arduino.
@@ -55,3 +65,9 @@ class Com(object):
         if not self.com_queue.empty():
             return self.com_queue.get()
         return None
+
+    def sendLedCommand(self, light: bool) -> bool:
+        if light:
+            self.sendCommand("L1\n")
+        else:
+            self.sendCommand("L0\n")
